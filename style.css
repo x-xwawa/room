@@ -1,0 +1,286 @@
+:root{
+  --accent: #b9a7e6;      /* 紫の統一色 */
+  --accent-dark: #7f67c8; /* 少し濃い紫 */
+  --text: #cbbcf2;        /* 文字の薄紫 */
+  --shadow: rgba(0,0,0,.25);
+
+  /* スマホ見本に寄せるための調整つまみ（ここ触ると一発で変わる） */
+  --thanks-size: clamp(14px, 4.2vw, 26px);
+  --icon-size: clamp(44px, 10vw, 72px);
+  --icon-text-size: clamp(14px, 4.0vw, 22px);
+  --icon-gap: 14px;   /* ←アイコン同士の縦間隔 */
+  --icon-internal-gap: 12px; /* ←アイコンと文字の横間隔 */
+}
+
+*{ box-sizing: border-box; }
+
+html, body{
+  height: 100%;
+  overflow: hidden; /* ✅1枚絵想定：スクロール禁止 */
+}
+
+body{
+  margin: 0;
+  font-family: "DotGothic16", system-ui, -apple-system, "Segoe UI", sans-serif;
+  background: #faf7ff;
+}
+
+/* 背景ステージ（100vh固定） */
+.stage{
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  background: url("images/bg_pc.png") center / cover no-repeat;
+}
+
+/* スマホ時は背景差し替え */
+@media (max-width: 768px){
+  .stage{
+    background-image: url("images/bg_sp.png");
+    background-position: center;
+  }
+}
+
+/* Thank you の文字 */
+.thanks{
+  position: absolute;
+  top: 4.5vh;
+  left: 6vw;
+  color: var(--text);
+  font-size: var(--thanks-size);
+  letter-spacing: .02em;
+  user-select: none;
+}
+
+/* アイコン置き場：縦並び */
+.icons{
+  position: absolute;
+  left: 7vw;
+  top: 18vh;
+  display: flex;
+  flex-direction: column;
+  gap: var(--icon-gap);
+}
+
+/* PC時：少しだけ位置調整（必要ならここも触る） */
+@media (min-width: 769px){
+  .icons{
+    left: 9vw;
+    top: 22vh;
+  }
+}
+
+/* アイコンボタン（aでもbuttonでも同じ見た目） */
+.icon-btn{
+  display: inline-flex;
+  align-items: center;
+  gap: var(--icon-internal-gap);
+  text-decoration: none;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 4px 6px;     /* ←ボタンの当たり判定 */
+  color: inherit;
+}
+
+/* アイコン */
+.icon-btn img{
+  width: var(--icon-size);
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 6px 10px var(--shadow));
+}
+
+/* 文字 */
+.icon-text{
+  color: var(--text);
+  font-size: var(--icon-text-size);
+  letter-spacing: .04em;
+  user-select: none;
+}
+
+/* ✅ メールの上：お題箱リンク（下線 + 位置合わせ） */
+.mail-top-link{
+  position: absolute;
+  left: 7vw;          /* ←スマホ時：icons と揃える */
+  bottom: 19vh;       /* ←メール帯の少し上（上下位置はここで微調整） */
+  text-decoration: underline;
+  text-underline-offset: 6px;
+  text-decoration-thickness: 2px;
+  cursor: pointer;
+}
+
+@media (min-width: 769px){
+  .mail-top-link{
+    left: 9vw;        /* ←PC時：icons と揃える */
+  }
+}
+
+.mail-top-link:hover{
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,.18));
+}
+
+/* メールボタン（下の紫帯） */
+.mail-btn{
+  position: absolute;
+  left: 50%;
+  bottom: 11vh;
+  transform: translateX(-50%);
+  width: min(560px, 82vw);
+  height: 58px;
+  background: rgba(202, 185, 245, 0.45);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-decoration: none;
+  box-shadow: 0 12px 28px var(--shadow);
+}
+
+.mail-icon{
+  color: rgba(90,60,160,.65);
+  font-size: 20px;
+}
+
+.mail-text{
+  color: rgba(90,60,160,.55);
+  font-size: clamp(12px, 3.6vw, 18px);
+  letter-spacing: .02em;
+}
+
+/* フェードアウト */
+#fade-layer{
+  position: fixed;
+  inset: 0;
+  background: #fff;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .35s ease;
+  z-index: 9998;
+}
+#fade-layer.on{ opacity: 1; }
+
+/* 暗転＋ロード */
+#loading{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.8);
+  display: none;
+  z-index: 9999;
+}
+#loading.on{ display: grid; place-items: center; }
+
+.spinner{
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 4px solid rgba(255,255,255,.25);
+  border-top-color: rgba(255,255,255,.9);
+  animation: spin 1s linear infinite;
+}
+@keyframes spin{ to{ transform: rotate(360deg); } }
+
+/* ===== モーダル（見本画像寄せ） ===== */
+.modal-backdrop{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.55);
+  display: none;
+  z-index: 10000;
+}
+.modal-backdrop.on{ display: grid; place-items: center; }
+
+/* ✅ 全体を少し小さく */
+.modal-window{
+  width: min(520px, 82vw);   /* ←小さく */
+  min-height: 184px;         /* ←少し低く */
+  background: #f7f3ff;
+  border: 2px solid rgba(185,167,230,.75);
+  border-radius: 18px;
+  box-shadow: 0 18px 40px rgba(0,0,0,.25);
+  overflow: hidden;
+}
+
+.modal-topbar{
+  height: 42px;              /* ←わずかに小さく */
+  background: rgba(185,167,230,.55);
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 6px 10px;
+}
+
+.win-btn{
+  width: 38px;
+  height: 28px;
+  border-radius: 10px;
+  border: 2px solid rgba(127,103,200,.55);
+  background: rgba(255,255,255,.75);
+  color: #7f67c8;
+  cursor: pointer;
+  font-weight: 700;
+  transition: border-color .15s ease, box-shadow .15s ease, background .15s ease;
+}
+.win-btn:hover{
+  border-color: rgba(185,167,230,.95);
+  box-shadow: 0 0 0 5px rgba(185,167,230,.32); /* ←ホバー強め */
+}
+
+.modal-body{
+  padding: 22px 20px 18px;   /* ←余白を少し減らす */
+  display: grid;
+  gap: 14px;                 /* ←間隔も少し詰める */
+}
+
+.modal-text{
+  color: #7f67c8;
+  font-size: 16px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.modal-actions{
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+}
+
+.modal-cancel, .modal-ok{
+  width: min(180px, 34vw);
+  height: 44px;
+  border-radius: 12px;
+  border: 2px solid rgba(127,103,200,.55);
+  cursor: pointer;
+  font-size: 16px;
+  font-family: "DotGothic16", system-ui, -apple-system, "Segoe UI", sans-serif;
+  transition: border-color .15s ease, box-shadow .15s ease, background .15s ease, color .15s ease;
+}
+
+.modal-cancel{
+  background: rgba(255,255,255,.92);
+  color: #7f67c8;
+}
+
+/* ✅ すすむ：背景と文字を少し薄く */
+.modal-ok{
+  background: rgba(185,167,230,.42);  /* ←薄く */
+  color: rgba(63,42,122,.70);         /* ←薄く */
+  font-weight: 700;
+}
+
+/* ✅ ホバー強め（枠と“光”を強く） */
+.modal-cancel:hover,
+.modal-ok:hover{
+  border-color: rgba(185,167,230,.98);
+  box-shadow: 0 0 0 6px rgba(185,167,230,.36);
+}
+
+/* キーボード操作でも同等に */
+.modal-cancel:focus-visible,
+.modal-ok:focus-visible,
+.win-btn:focus-visible{
+  outline: none;
+  border-color: rgba(185,167,230,.98);
+  box-shadow: 0 0 0 6px rgba(185,167,230,.38);
+}
