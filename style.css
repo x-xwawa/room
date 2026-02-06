@@ -6,10 +6,19 @@
 
   /* スマホ見本に寄せるための調整つまみ（ここ触ると一発で変わる） */
   --thanks-size: clamp(14px, 4.2vw, 26px);
+
+  /* PC/全体のアイコンサイズ（ベース） */
   --icon-size: clamp(44px, 10vw, 72px);
+
+  /* 文字サイズは今のまま */
   --icon-text-size: clamp(14px, 4.0vw, 22px);
-  --icon-gap: 14px;   /* ←アイコン同士の縦間隔 */
-  --icon-internal-gap: 12px; /* ←アイコンと文字の横間隔 */
+
+  --icon-gap: 14px;               /* ←アイコン同士の縦間隔 */
+  --icon-internal-gap: 12px;      /* ←アイコンと文字の横間隔 */
+
+  /* ✅メール帯の位置を基準に、お題箱が必ず上になるようにする */
+  --mail-bottom: 11vh;            /* メール帯の下からの距離（共通） */
+  --mail-gap-from-btn: 80px;      /* メール帯とお題箱の間隔（ここが調整つまみ） */
 }
 
 *{ box-sizing: border-box; }
@@ -38,6 +47,11 @@ body{
   .stage{
     background-image: url("images/bg_sp.png");
     background-position: center;
+  }
+
+  /* ✅スマホだけ：アイコンを大きく（文字サイズは触らない） */
+  :root{
+    --icon-size: clamp(68px, 14vw, 110px); /* ←ここがスマホのアイコン拡大 */
   }
 }
 
@@ -102,8 +116,8 @@ body{
 /* ✅ メールの上：お題箱リンク（下線 + 位置合わせ） */
 .mail-top-link{
   position: absolute;
-  left: 7vw;          /* ←スマホ時：icons と揃える */
-  bottom: 19vh;       /* ←メール帯の少し上（上下位置はここで微調整） */
+  left: 7vw; /* ←スマホ時：icons と揃える */
+  bottom: calc(var(--mail-bottom) + var(--mail-gap-from-btn)); /* ✅メール帯基準で上に置く */
   text-decoration: underline;
   text-underline-offset: 6px;
   text-decoration-thickness: 2px;
@@ -112,7 +126,7 @@ body{
 
 @media (min-width: 769px){
   .mail-top-link{
-    left: 9vw;        /* ←PC時：icons と揃える */
+    left: 9vw; /* ←PC時：icons と揃える */
   }
 }
 
@@ -124,7 +138,7 @@ body{
 .mail-btn{
   position: absolute;
   left: 50%;
-  bottom: 11vh;
+  bottom: var(--mail-bottom); /* ✅ここがポイント */
   transform: translateX(-50%);
   width: min(560px, 82vw);
   height: 58px;
