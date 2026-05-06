@@ -26,7 +26,6 @@ function closeModal(){
 /* ふわっと遷移（白フェード） */
 function fadeAndGoExternal(url){
   fadeLayer.classList.add("on");
-
   setTimeout(() => {
     window.open(url, "_blank", "noopener,noreferrer");
     fadeLayer.classList.remove("on");
