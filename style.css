@@ -46,7 +46,6 @@ body{
   }
 }
 
-/* Thank you の文字 */
 .thanks{
   position: absolute;
   top: 4.5vh;
@@ -55,13 +54,8 @@ body{
   font-size: var(--thanks-size);
   letter-spacing: .02em;
   user-select: none;
-  text-shadow: 0 3px 10px rgba(127,103,200,.22);
-
-  display: inline-block;
-  animation: katakata .28s steps(2, end) 5;
 }
 
-/* アイコン置き場 */
 .icons{
   position: absolute;
   left: 7vw;
@@ -78,7 +72,6 @@ body{
   }
 }
 
-/* アイコンボタン */
 .icon-btn{
   display: inline-flex;
   align-items: center;
@@ -96,36 +89,15 @@ body{
   height: auto;
   display: block;
   filter: drop-shadow(0 6px 10px var(--shadow));
-  transition: transform .25s ease, filter .25s ease;
 }
 
-.icon-btn:hover img{
-  transform: translateY(-4px) rotate(-3deg) scale(1.04);
-  filter: drop-shadow(0 10px 14px rgba(127,103,200,.32));
-}
-
-.icon-btn:hover .icon-text{
-  text-shadow: 0 0 10px rgba(185,167,230,.75);
-}
-
-/* 文字 */
 .icon-text{
   color: var(--text);
   font-size: var(--icon-text-size);
   letter-spacing: .04em;
   user-select: none;
-  transition: text-shadow .25s ease;
-
-  display: inline-block;
-  animation: katakata .28s steps(2, end) 5;
 }
 
-.icon-btn:nth-child(1) .icon-text{ animation-delay: .08s; }
-.icon-btn:nth-child(2) .icon-text{ animation-delay: .14s; }
-.icon-btn:nth-child(3) .icon-text{ animation-delay: .20s; }
-.icon-btn:nth-child(4) .icon-text{ animation-delay: .26s; }
-
-/* お題箱リンク */
 .mail-top-link{
   position: absolute;
   left: 7vw;
@@ -134,10 +106,6 @@ body{
   text-underline-offset: 6px;
   text-decoration-thickness: 2px;
   cursor: pointer;
-
-  display: inline-block;
-  animation: katakata .28s steps(2, end) 5;
-  animation-delay: .34s;
 }
 
 @media (min-width: 769px){
@@ -148,10 +116,8 @@ body{
 
 .mail-top-link:hover{
   filter: drop-shadow(0 4px 8px rgba(0,0,0,.18));
-  text-shadow: 0 0 10px rgba(185,167,230,.75);
 }
 
-/* メールボタン */
 .mail-btn{
   position: absolute;
   left: 50%;
@@ -167,21 +133,11 @@ body{
   gap: 10px;
   text-decoration: none;
   box-shadow: 0 12px 28px var(--shadow);
-  transition: box-shadow .25s ease, background .25s ease;
-}
-
-.mail-btn:hover{
-  background: rgba(202, 185, 245, 0.58);
-  box-shadow: 0 14px 34px rgba(127,103,200,.28);
 }
 
 .mail-icon{
   color: rgba(90,60,160,.65);
   font-size: 20px;
-
-  display: inline-block;
-  animation: katakata .28s steps(2, end) 5;
-  animation-delay: .42s;
 }
 
 .mail-text{
@@ -190,34 +146,6 @@ body{
   letter-spacing: .02em;
 }
 
-/* 最初だけカタカタ */
-@keyframes katakata{
-  0%{
-    transform: translate(0,0) rotate(0deg);
-  }
-
-  20%{
-    transform: translate(1px,-1px) rotate(1deg);
-  }
-
-  40%{
-    transform: translate(-1px,1px) rotate(-1deg);
-  }
-
-  60%{
-    transform: translate(1px,1px) rotate(.5deg);
-  }
-
-  80%{
-    transform: translate(-1px,-1px) rotate(-.5deg);
-  }
-
-  100%{
-    transform: translate(0,0) rotate(0deg);
-  }
-}
-
-/* フェードアウト：Pixivへ進む時だけ使う */
 #fade-layer{
   position: fixed;
   inset: 0;
@@ -232,7 +160,6 @@ body{
   opacity: 1;
 }
 
-/* 暗転＋ロード */
 #loading{
   position: fixed;
   inset: 0;
@@ -261,7 +188,6 @@ body{
   }
 }
 
-/* モーダル */
 .modal-backdrop{
   position: fixed;
   inset: 0;
@@ -365,14 +291,4 @@ body{
   outline: none;
   border-color: rgba(185,167,230,.98);
   box-shadow: 0 0 0 6px rgba(185,167,230,.38);
-}
-
-@media (prefers-reduced-motion: reduce){
-  *,
-  *::before,
-  *::after{
-    animation-duration: .01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: .01ms !important;
-  }
 }
