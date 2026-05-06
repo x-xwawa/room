@@ -28,26 +28,11 @@ body{
   background: #faf7ff;
 }
 
-/* 背景ステージ */
 .stage{
   position: relative;
   height: 100vh;
   width: 100%;
   background: url("images/bg_pc.png") center / cover no-repeat;
-  opacity: 0;
-  animation: pageFadeIn .9s ease forwards;
-}
-
-/* 画面全体をふわっと表示 */
-@keyframes pageFadeIn{
-  from{
-    opacity: 0;
-    filter: blur(6px);
-  }
-  to{
-    opacity: 1;
-    filter: blur(0);
-  }
 }
 
 @media (max-width: 768px){
@@ -72,43 +57,8 @@ body{
   user-select: none;
   text-shadow: 0 3px 10px rgba(127,103,200,.22);
 
-  animation:
-    thanksAppear .9s ease .15s both,
-    yurayura 2.4s ease-in-out 1.05s 2;
-}
-
-/* 最初にふわっと出る */
-@keyframes thanksAppear{
-  from{
-    opacity: 0;
-    transform: translateY(-10px) scale(.98);
-  }
-  to{
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-/* 文字のゆらゆら */
-@keyframes yurayura{
-  0%{
-    transform: rotate(0deg) translateY(0);
-  }
-  20%{
-    transform: rotate(1.8deg) translateY(-2px);
-  }
-  40%{
-    transform: rotate(-1.8deg) translateY(2px);
-  }
-  60%{
-    transform: rotate(1.2deg) translateY(-1px);
-  }
-  80%{
-    transform: rotate(-1deg) translateY(1px);
-  }
-  100%{
-    transform: rotate(0deg) translateY(0);
-  }
+  display: inline-block;
+  animation: katakata .28s steps(2, end) 5;
 }
 
 /* アイコン置き場 */
@@ -139,26 +89,6 @@ body{
   cursor: pointer;
   padding: 4px 6px;
   color: inherit;
-
-  opacity: 0;
-  transform: translateX(-10px);
-  animation: iconPop .7s ease both;
-}
-
-.icon-btn:nth-child(1){ animation-delay: .45s; }
-.icon-btn:nth-child(2){ animation-delay: .58s; }
-.icon-btn:nth-child(3){ animation-delay: .71s; }
-.icon-btn:nth-child(4){ animation-delay: .84s; }
-
-@keyframes iconPop{
-  from{
-    opacity: 0;
-    transform: translateX(-12px) scale(.96);
-  }
-  to{
-    opacity: 1;
-    transform: translateX(0) scale(1);
-  }
 }
 
 .icon-btn img{
@@ -184,8 +114,16 @@ body{
   font-size: var(--icon-text-size);
   letter-spacing: .04em;
   user-select: none;
-  transition: text-shadow .25s ease, transform .25s ease;
+  transition: text-shadow .25s ease;
+
+  display: inline-block;
+  animation: katakata .28s steps(2, end) 5;
 }
+
+.icon-btn:nth-child(1) .icon-text{ animation-delay: .08s; }
+.icon-btn:nth-child(2) .icon-text{ animation-delay: .14s; }
+.icon-btn:nth-child(3) .icon-text{ animation-delay: .20s; }
+.icon-btn:nth-child(4) .icon-text{ animation-delay: .26s; }
 
 /* お題箱リンク */
 .mail-top-link{
@@ -197,8 +135,9 @@ body{
   text-decoration-thickness: 2px;
   cursor: pointer;
 
-  opacity: 0;
-  animation: smallFloatIn .75s ease 1s both;
+  display: inline-block;
+  animation: katakata .28s steps(2, end) 5;
+  animation-delay: .34s;
 }
 
 @media (min-width: 769px){
@@ -210,17 +149,6 @@ body{
 .mail-top-link:hover{
   filter: drop-shadow(0 4px 8px rgba(0,0,0,.18));
   text-shadow: 0 0 10px rgba(185,167,230,.75);
-}
-
-@keyframes smallFloatIn{
-  from{
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to{
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 /* メールボタン */
@@ -239,9 +167,6 @@ body{
   gap: 10px;
   text-decoration: none;
   box-shadow: 0 12px 28px var(--shadow);
-
-  opacity: 0;
-  animation: mailAppear .8s ease 1.08s both;
   transition: box-shadow .25s ease, background .25s ease;
 }
 
@@ -250,30 +175,13 @@ body{
   box-shadow: 0 14px 34px rgba(127,103,200,.28);
 }
 
-@keyframes mailAppear{
-  from{
-    opacity: 0;
-    transform: translateX(-50%) translateY(14px);
-  }
-  to{
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-  }
-}
-
 .mail-icon{
   color: rgba(90,60,160,.65);
   font-size: 20px;
-  animation: mailYura 2.8s ease-in-out 1.6s infinite;
-}
 
-@keyframes mailYura{
-  0%, 100%{
-    transform: translateY(0) rotate(0deg);
-  }
-  50%{
-    transform: translateY(-2px) rotate(-2deg);
-  }
+  display: inline-block;
+  animation: katakata .28s steps(2, end) 5;
+  animation-delay: .42s;
 }
 
 .mail-text{
@@ -282,7 +190,34 @@ body{
   letter-spacing: .02em;
 }
 
-/* フェードアウト */
+/* 最初だけカタカタ */
+@keyframes katakata{
+  0%{
+    transform: translate(0,0) rotate(0deg);
+  }
+
+  20%{
+    transform: translate(1px,-1px) rotate(1deg);
+  }
+
+  40%{
+    transform: translate(-1px,1px) rotate(-1deg);
+  }
+
+  60%{
+    transform: translate(1px,1px) rotate(.5deg);
+  }
+
+  80%{
+    transform: translate(-1px,-1px) rotate(-.5deg);
+  }
+
+  100%{
+    transform: translate(0,0) rotate(0deg);
+  }
+}
+
+/* フェードアウト：Pixivへ進む時だけ使う */
 #fade-layer{
   position: fixed;
   inset: 0;
@@ -348,18 +283,6 @@ body{
   border-radius: 18px;
   box-shadow: 0 18px 40px rgba(0,0,0,.25);
   overflow: hidden;
-  animation: modalPop .28s ease both;
-}
-
-@keyframes modalPop{
-  from{
-    opacity: 0;
-    transform: translateY(10px) scale(.96);
-  }
-  to{
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
 }
 
 .modal-topbar{
@@ -444,7 +367,6 @@ body{
   box-shadow: 0 0 0 6px rgba(185,167,230,.38);
 }
 
-/* 動きが苦手な環境向け */
 @media (prefers-reduced-motion: reduce){
   *,
   *::before,
@@ -452,69 +374,5 @@ body{
     animation-duration: .01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: .01ms !important;
-  }
-}
-
-/* =========================================
-   最初だけ文字がカタカタ揺れる
-========================================= */
-
-.thanks,
-.icon-text,
-.mail-top-link,
-.mail-icon{
-  display: inline-block;
-  animation: katakata .28s steps(2, end) 5;
-}
-
-/* 少しズラして出す */
-.icon-btn:nth-child(1) .icon-text{
-  animation-delay: .08s;
-}
-
-.icon-btn:nth-child(2) .icon-text{
-  animation-delay: .14s;
-}
-
-.icon-btn:nth-child(3) .icon-text{
-  animation-delay: .20s;
-}
-
-.icon-btn:nth-child(4) .icon-text{
-  animation-delay: .26s;
-}
-
-.mail-top-link{
-  animation-delay: .34s;
-}
-
-.mail-icon{
-  animation-delay: .42s;
-}
-
-/* カタカタ */
-@keyframes katakata{
-  0%{
-    transform: translate(0,0) rotate(0deg);
-  }
-
-  20%{
-    transform: translate(1px,-1px) rotate(1deg);
-  }
-
-  40%{
-    transform: translate(-1px,1px) rotate(-1deg);
-  }
-
-  60%{
-    transform: translate(1px,1px) rotate(.5deg);
-  }
-
-  80%{
-    transform: translate(-1px,-1px) rotate(-.5deg);
-  }
-
-  100%{
-    transform: translate(0,0) rotate(0deg);
   }
 }
