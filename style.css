@@ -454,3 +454,67 @@ body{
     transition-duration: .01ms !important;
   }
 }
+
+/* =========================================
+   最初だけ文字がカタカタ揺れる
+========================================= */
+
+.thanks,
+.icon-text,
+.mail-top-link,
+.mail-icon{
+  display: inline-block;
+  animation: katakata .28s steps(2, end) 5;
+}
+
+/* 少しズラして出す */
+.icon-btn:nth-child(1) .icon-text{
+  animation-delay: .08s;
+}
+
+.icon-btn:nth-child(2) .icon-text{
+  animation-delay: .14s;
+}
+
+.icon-btn:nth-child(3) .icon-text{
+  animation-delay: .20s;
+}
+
+.icon-btn:nth-child(4) .icon-text{
+  animation-delay: .26s;
+}
+
+.mail-top-link{
+  animation-delay: .34s;
+}
+
+.mail-icon{
+  animation-delay: .42s;
+}
+
+/* カタカタ */
+@keyframes katakata{
+  0%{
+    transform: translate(0,0) rotate(0deg);
+  }
+
+  20%{
+    transform: translate(1px,-1px) rotate(1deg);
+  }
+
+  40%{
+    transform: translate(-1px,1px) rotate(-1deg);
+  }
+
+  60%{
+    transform: translate(1px,1px) rotate(.5deg);
+  }
+
+  80%{
+    transform: translate(-1px,-1px) rotate(-.5deg);
+  }
+
+  100%{
+    transform: translate(0,0) rotate(0deg);
+  }
+}
