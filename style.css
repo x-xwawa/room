@@ -1,31 +1,25 @@
 :root{
-  --accent: #b9a7e6;      /* 紫の統一色 */
-  --accent-dark: #7f67c8; /* 少し濃い紫 */
-  --text: #cbbcf2;        /* 文字の薄紫 */
+  --accent: #b9a7e6;
+  --accent-dark: #7f67c8;
+  --text: #cbbcf2;
   --shadow: rgba(0,0,0,.25);
 
-  /* スマホ見本に寄せるための調整つまみ（ここ触ると一発で変わる） */
   --thanks-size: clamp(14px, 4.2vw, 26px);
-
-  /* PC/全体のアイコンサイズ（ベース） */
   --icon-size: clamp(44px, 10vw, 72px);
-
-  /* 文字サイズは今のまま */
   --icon-text-size: clamp(14px, 4.0vw, 22px);
 
-  --icon-gap: 14px;               /* ←アイコン同士の縦間隔 */
-  --icon-internal-gap: 12px;      /* ←アイコンと文字の横間隔 */
+  --icon-gap: 14px;
+  --icon-internal-gap: 12px;
 
-  /* ✅メール帯の位置を基準に、お題箱が必ず上になるようにする */
-  --mail-bottom: 11vh;            /* メール帯の下からの距離（共通） */
-  --mail-gap-from-btn: 80px;      /* メール帯とお題箱の間隔（ここが調整つまみ） */
+  --mail-bottom: 11vh;
+  --mail-gap-from-btn: 80px;
 }
 
 *{ box-sizing: border-box; }
 
 html, body{
   height: 100%;
-  overflow: hidden; /* ✅1枚絵想定：スクロール禁止 */
+  overflow: hidden;
 }
 
 body{
@@ -34,24 +28,36 @@ body{
   background: #faf7ff;
 }
 
-/* 背景ステージ（100vh固定） */
+/* 背景ステージ */
 .stage{
   position: relative;
   height: 100vh;
   width: 100%;
   background: url("images/bg_pc.png") center / cover no-repeat;
+  opacity: 0;
+  animation: pageFadeIn .9s ease forwards;
 }
 
-/* スマホ時は背景差し替え */
+/* 画面全体をふわっと表示 */
+@keyframes pageFadeIn{
+  from{
+    opacity: 0;
+    filter: blur(6px);
+  }
+  to{
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
 @media (max-width: 768px){
   .stage{
     background-image: url("images/bg_sp.png");
     background-position: center;
   }
 
-  /* ✅スマホだけ：アイコンを大きく（文字サイズは触らない） */
   :root{
-    --icon-size: clamp(68px, 14vw, 110px); /* ←ここがスマホのアイコン拡大 */
+    --icon-size: clamp(68px, 14vw, 110px);
   }
 }
 
@@ -64,9 +70,48 @@ body{
   font-size: var(--thanks-size);
   letter-spacing: .02em;
   user-select: none;
+  text-shadow: 0 3px 10px rgba(127,103,200,.22);
+
+  animation:
+    thanksAppear .9s ease .15s both,
+    yurayura 2.4s ease-in-out 1.05s 2;
 }
 
-/* アイコン置き場：縦並び */
+/* 最初にふわっと出る */
+@keyframes thanksAppear{
+  from{
+    opacity: 0;
+    transform: translateY(-10px) scale(.98);
+  }
+  to{
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* 文字のゆらゆら */
+@keyframes yurayura{
+  0%{
+    transform: rotate(0deg) translateY(0);
+  }
+  20%{
+    transform: rotate(1.8deg) translateY(-2px);
+  }
+  40%{
+    transform: rotate(-1.8deg) translateY(2px);
+  }
+  60%{
+    transform: rotate(1.2deg) translateY(-1px);
+  }
+  80%{
+    transform: rotate(-1deg) translateY(1px);
+  }
+  100%{
+    transform: rotate(0deg) translateY(0);
+  }
+}
+
+/* アイコン置き場 */
 .icons{
   position: absolute;
   left: 7vw;
@@ -76,7 +121,6 @@ body{
   gap: var(--icon-gap);
 }
 
-/* PC時：少しだけ位置調整（必要ならここも触る） */
 @media (min-width: 769px){
   .icons{
     left: 9vw;
@@ -84,7 +128,7 @@ body{
   }
 }
 
-/* アイコンボタン（aでもbuttonでも同じ見た目） */
+/* アイコンボタン */
 .icon-btn{
   display: inline-flex;
   align-items: center;
@@ -93,16 +137,45 @@ body{
   border: none;
   background: transparent;
   cursor: pointer;
-  padding: 4px 6px;     /* ←ボタンの当たり判定 */
+  padding: 4px 6px;
   color: inherit;
+
+  opacity: 0;
+  transform: translateX(-10px);
+  animation: iconPop .7s ease both;
 }
 
-/* アイコン */
+.icon-btn:nth-child(1){ animation-delay: .45s; }
+.icon-btn:nth-child(2){ animation-delay: .58s; }
+.icon-btn:nth-child(3){ animation-delay: .71s; }
+.icon-btn:nth-child(4){ animation-delay: .84s; }
+
+@keyframes iconPop{
+  from{
+    opacity: 0;
+    transform: translateX(-12px) scale(.96);
+  }
+  to{
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
 .icon-btn img{
   width: var(--icon-size);
   height: auto;
   display: block;
   filter: drop-shadow(0 6px 10px var(--shadow));
+  transition: transform .25s ease, filter .25s ease;
+}
+
+.icon-btn:hover img{
+  transform: translateY(-4px) rotate(-3deg) scale(1.04);
+  filter: drop-shadow(0 10px 14px rgba(127,103,200,.32));
+}
+
+.icon-btn:hover .icon-text{
+  text-shadow: 0 0 10px rgba(185,167,230,.75);
 }
 
 /* 文字 */
@@ -111,34 +184,50 @@ body{
   font-size: var(--icon-text-size);
   letter-spacing: .04em;
   user-select: none;
+  transition: text-shadow .25s ease, transform .25s ease;
 }
 
-/* ✅ メールの上：お題箱リンク（下線 + 位置合わせ） */
+/* お題箱リンク */
 .mail-top-link{
   position: absolute;
-  left: 7vw; /* ←スマホ時：icons と揃える */
-  bottom: calc(var(--mail-bottom) + var(--mail-gap-from-btn)); /* ✅メール帯基準で上に置く */
+  left: 7vw;
+  bottom: calc(var(--mail-bottom) + var(--mail-gap-from-btn));
   text-decoration: underline;
   text-underline-offset: 6px;
   text-decoration-thickness: 2px;
   cursor: pointer;
+
+  opacity: 0;
+  animation: smallFloatIn .75s ease 1s both;
 }
 
 @media (min-width: 769px){
   .mail-top-link{
-    left: 9vw; /* ←PC時：icons と揃える */
+    left: 9vw;
   }
 }
 
 .mail-top-link:hover{
   filter: drop-shadow(0 4px 8px rgba(0,0,0,.18));
+  text-shadow: 0 0 10px rgba(185,167,230,.75);
 }
 
-/* メールボタン（下の紫帯） */
+@keyframes smallFloatIn{
+  from{
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to{
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* メールボタン */
 .mail-btn{
   position: absolute;
   left: 50%;
-  bottom: var(--mail-bottom); /* ✅ここがポイント */
+  bottom: var(--mail-bottom);
   transform: translateX(-50%);
   width: min(560px, 82vw);
   height: 58px;
@@ -150,11 +239,41 @@ body{
   gap: 10px;
   text-decoration: none;
   box-shadow: 0 12px 28px var(--shadow);
+
+  opacity: 0;
+  animation: mailAppear .8s ease 1.08s both;
+  transition: box-shadow .25s ease, background .25s ease;
+}
+
+.mail-btn:hover{
+  background: rgba(202, 185, 245, 0.58);
+  box-shadow: 0 14px 34px rgba(127,103,200,.28);
+}
+
+@keyframes mailAppear{
+  from{
+    opacity: 0;
+    transform: translateX(-50%) translateY(14px);
+  }
+  to{
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
 }
 
 .mail-icon{
   color: rgba(90,60,160,.65);
   font-size: 20px;
+  animation: mailYura 2.8s ease-in-out 1.6s infinite;
+}
+
+@keyframes mailYura{
+  0%, 100%{
+    transform: translateY(0) rotate(0deg);
+  }
+  50%{
+    transform: translateY(-2px) rotate(-2deg);
+  }
 }
 
 .mail-text{
@@ -173,7 +292,10 @@ body{
   transition: opacity .35s ease;
   z-index: 9998;
 }
-#fade-layer.on{ opacity: 1; }
+
+#fade-layer.on{
+  opacity: 1;
+}
 
 /* 暗転＋ロード */
 #loading{
@@ -183,7 +305,11 @@ body{
   display: none;
   z-index: 9999;
 }
-#loading.on{ display: grid; place-items: center; }
+
+#loading.on{
+  display: grid;
+  place-items: center;
+}
 
 .spinner{
   width: 44px;
@@ -193,9 +319,14 @@ body{
   border-top-color: rgba(255,255,255,.9);
   animation: spin 1s linear infinite;
 }
-@keyframes spin{ to{ transform: rotate(360deg); } }
 
-/* ===== モーダル（見本画像寄せ） ===== */
+@keyframes spin{
+  to{
+    transform: rotate(360deg);
+  }
+}
+
+/* モーダル */
 .modal-backdrop{
   position: fixed;
   inset: 0;
@@ -203,21 +334,36 @@ body{
   display: none;
   z-index: 10000;
 }
-.modal-backdrop.on{ display: grid; place-items: center; }
 
-/* ✅ 全体を少し小さく */
+.modal-backdrop.on{
+  display: grid;
+  place-items: center;
+}
+
 .modal-window{
-  width: min(520px, 82vw);   /* ←小さく */
-  min-height: 184px;         /* ←少し低く */
+  width: min(520px, 82vw);
+  min-height: 184px;
   background: #f7f3ff;
   border: 2px solid rgba(185,167,230,.75);
   border-radius: 18px;
   box-shadow: 0 18px 40px rgba(0,0,0,.25);
   overflow: hidden;
+  animation: modalPop .28s ease both;
+}
+
+@keyframes modalPop{
+  from{
+    opacity: 0;
+    transform: translateY(10px) scale(.96);
+  }
+  to{
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .modal-topbar{
-  height: 42px;              /* ←わずかに小さく */
+  height: 42px;
   background: rgba(185,167,230,.55);
   display: flex;
   justify-content: flex-end;
@@ -236,15 +382,16 @@ body{
   font-weight: 700;
   transition: border-color .15s ease, box-shadow .15s ease, background .15s ease;
 }
+
 .win-btn:hover{
   border-color: rgba(185,167,230,.95);
-  box-shadow: 0 0 0 5px rgba(185,167,230,.32); /* ←ホバー強め */
+  box-shadow: 0 0 0 5px rgba(185,167,230,.32);
 }
 
 .modal-body{
-  padding: 22px 20px 18px;   /* ←余白を少し減らす */
+  padding: 22px 20px 18px;
   display: grid;
-  gap: 14px;                 /* ←間隔も少し詰める */
+  gap: 14px;
 }
 
 .modal-text{
@@ -260,7 +407,8 @@ body{
   gap: 14px;
 }
 
-.modal-cancel, .modal-ok{
+.modal-cancel,
+.modal-ok{
   width: min(180px, 34vw);
   height: 44px;
   border-radius: 12px;
@@ -276,25 +424,33 @@ body{
   color: #7f67c8;
 }
 
-/* ✅ すすむ：背景と文字を少し薄く */
 .modal-ok{
-  background: rgba(185,167,230,.42);  /* ←薄く */
-  color: rgba(63,42,122,.70);         /* ←薄く */
+  background: rgba(185,167,230,.42);
+  color: rgba(63,42,122,.70);
   font-weight: 700;
 }
 
-/* ✅ ホバー強め（枠と“光”を強く） */
 .modal-cancel:hover,
 .modal-ok:hover{
   border-color: rgba(185,167,230,.98);
   box-shadow: 0 0 0 6px rgba(185,167,230,.36);
 }
 
-/* キーボード操作でも同等に */
 .modal-cancel:focus-visible,
 .modal-ok:focus-visible,
 .win-btn:focus-visible{
   outline: none;
   border-color: rgba(185,167,230,.98);
   box-shadow: 0 0 0 6px rgba(185,167,230,.38);
+}
+
+/* 動きが苦手な環境向け */
+@media (prefers-reduced-motion: reduce){
+  *,
+  *::before,
+  *::after{
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
 }
