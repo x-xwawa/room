@@ -17,6 +17,7 @@ function openModal(){
   modal.classList.add("on");
   modal.setAttribute("aria-hidden", "false");
 }
+
 function closeModal(){
   modal.classList.remove("on");
   modal.setAttribute("aria-hidden", "true");
@@ -25,8 +26,8 @@ function closeModal(){
 /* ふわっと遷移（白フェード） */
 function fadeAndGoExternal(url){
   fadeLayer.classList.add("on");
+
   setTimeout(() => {
-    // 外部は新しいタブで開く（安全設定つき）
     window.open(url, "_blank", "noopener,noreferrer");
     fadeLayer.classList.remove("on");
     closeModal();
@@ -42,7 +43,6 @@ function darkLoadAndReturn(){
   setTimeout(() => {
     loading.classList.remove("on");
     loading.setAttribute("aria-hidden", "true");
-    // ページ先頭へ（スクロール禁止でも確実）
     window.location.hash = "#top";
   }, 900);
 }
@@ -58,14 +58,14 @@ btnCancel?.addEventListener("click", darkLoadAndReturn);
 btnClose?.addEventListener("click", darkLoadAndReturn);
 btnMin?.addEventListener("click", darkLoadAndReturn);
 
-/* Escで閉じる（閉じるだけ。戻る演出にしたいならdarkLoadAndReturnに変更OK） */
+/* Escで閉じる */
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape" && modal.classList.contains("on")) {
     closeModal();
   }
 });
 
-/* 背景クリックで閉じる（不要なら消してOK） */
+/* 背景クリックで閉じる */
 modal?.addEventListener("click", (e) => {
   if (e.target === modal) closeModal();
 });
