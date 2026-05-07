@@ -271,7 +271,10 @@ body{
   transform: scale(var(--home-msg-scale, var(--home-msg-global-scale)));
   transform-origin: top left;
 
-  pointer-events: none;
+  /*
+    リンクつきコメントを押せるようにするため auto にしています。
+  */
+  pointer-events: auto;
   user-select: none;
 
   opacity: 0;
@@ -280,6 +283,23 @@ body{
 .home-message.is-show{
   display: flex;
   animation: homeMessageFade 2s ease forwards;
+}
+
+/* ランダム一言ウィンドウ内のリンク */
+.home-message a{
+  color: #4c6fdc;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  text-decoration-thickness: 1.5px;
+  pointer-events: auto;
+}
+
+.home-message a:visited{
+  color: #4c6fdc;
+}
+
+.home-message a:hover{
+  filter: brightness(1.08);
 }
 
 @keyframes homeMessageFade{
