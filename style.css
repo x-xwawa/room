@@ -35,7 +35,6 @@ body{
   background: url("images/bg_pc.png") center / cover no-repeat;
 }
 
-/* Thank you の文字 */
 .thanks{
   position: absolute;
   top: 4.5vh;
@@ -44,12 +43,10 @@ body{
   font-size: var(--thanks-size);
   letter-spacing: .02em;
   user-select: none;
-
   display: inline-block;
   animation: thanksKatakata .22s steps(2, end) 23;
 }
 
-/* 約10秒だけカタカタ */
 @keyframes thanksKatakata{
   0%{ transform: translate(0,0) rotate(0deg); }
   20%{ transform: translate(1px,-1px) rotate(1deg); }
@@ -59,7 +56,6 @@ body{
   100%{ transform: translate(0,0) rotate(0deg); }
 }
 
-/* アイコン置き場 */
 .icons{
   position: absolute;
   left: 7vw;
@@ -69,7 +65,6 @@ body{
   gap: var(--icon-gap);
 }
 
-/* PC時は今まで通り */
 @media (min-width: 769px){
   .icons{
     left: 9vw;
@@ -77,7 +72,6 @@ body{
   }
 }
 
-/* スマホ時 */
 @media (max-width: 768px){
   .stage{
     background-image: url("images/bg_sp.png");
@@ -88,7 +82,6 @@ body{
     --icon-size: clamp(68px, 14vw, 110px);
   }
 
-  /* メールボックスの左端に合わせる */
   .icons{
     left: 9vw;
   }
@@ -170,6 +163,72 @@ body{
   color: rgba(90,60,160,.55);
   font-size: clamp(12px, 3.6vw, 18px);
   letter-spacing: .02em;
+}
+
+/* 最初の入力ウィンドウ */
+.gate{
+  position: fixed;
+  inset: 0;
+  z-index: 20000;
+  display: grid;
+  place-items: center;
+  background: rgba(255,255,255,.72);
+}
+
+.gate.is-hidden{
+  display: none;
+}
+
+.gate-window{
+  width: min(520px, 76vw);
+  padding: 42px 38px 38px;
+  border: 3px solid #d99cff;
+  background: rgba(255,255,255,.74);
+  box-shadow: 0 18px 42px rgba(0,0,0,.22);
+  text-align: center;
+}
+
+.gate-text{
+  margin: 0 0 24px;
+  color: rgba(120,120,120,.82);
+  font-size: clamp(15px, 4vw, 20px);
+  letter-spacing: .06em;
+}
+
+.gate-input{
+  width: min(360px, 64vw);
+  height: 46px;
+  border: 2px solid rgba(210,210,210,.9);
+  background: rgba(255,255,255,.92);
+  color: #8c8c8c;
+  font-size: 24px;
+  font-family: inherit;
+  padding: 4px 12px;
+  box-shadow: inset 0 2px 5px rgba(0,0,0,.08);
+  caret-color: #9a9a9a;
+}
+
+.gate-input:focus{
+  outline: none;
+  border-color: rgba(217,156,255,.9);
+}
+
+.gate-ok{
+  display: block;
+  margin: 28px auto 0;
+  width: 160px;
+  height: 44px;
+  border: 1px solid rgba(210,210,210,.9);
+  background: linear-gradient(#fff, #e9e9e9);
+  color: #999;
+  font-size: 18px;
+  font-family: inherit;
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(0,0,0,.12);
+}
+
+.gate-ok:hover{
+  filter: brightness(1.03);
 }
 
 #fade-layer{
