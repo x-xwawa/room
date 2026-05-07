@@ -113,6 +113,16 @@ const HOME_MESSAGES = [
     width: "54vw",
     height: "124px",
     align: "center"
+  },
+  {
+    text: "",
+    linkText: "びょういん",
+    linkUrl: "https://yuru-to.net/?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAdGRleARppjlleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA8xMjQwMjQ1NzQyODc0MTQAAacy2_3gjvzIZU3WewlBUTvG7tiqSNidWvJLb3dOJfuf4EW1BYLHb2RLoO6t9w_aem_fE6tKvl7kzYpNALzA03TOQ",
+    left: "1.5vw",
+    top: "37vh",
+    width: "54vw",
+    height: "124px",
+    align: "left"
   }
 ];
 
