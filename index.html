@@ -2,18 +2,14 @@
 <html lang="ja">
 <head>
   <meta charset="utf-8" />
-
-  <!-- スマホ表示を安定させる -->
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-
   <title>⋱♱⋰ ⋱✮⋰ ⋱♱⋰ ⋱✮⋰ ⋱♱⋰</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
 
-  <!-- GitHub Pagesのキャッシュ対策。CSS更新時は v=2, v=3 と数字を変える -->
-  <link rel="stylesheet" href="style.css?v=2" />
+  <link rel="stylesheet" href="style.css?v=4" />
 </head>
 
 <body>
@@ -64,7 +60,7 @@
 
   <!-- 最初の入力ウィンドウ -->
   <div id="gate" class="gate" aria-hidden="false">
-    <div class="gate-window">
+    <div class="gate-window" id="gate-window">
       <p class="gate-text">・すきなことばをいれてね・</p>
 
       <input
@@ -72,8 +68,11 @@
         class="gate-input"
         type="text"
         autocomplete="off"
+        autocapitalize="off"
+        autocorrect="off"
+        spellcheck="false"
+        inputmode="text"
         aria-label="すきなことば"
-        autofocus
       />
 
       <button id="gate-ok" class="gate-ok" type="button">すすむ</button>
@@ -99,6 +98,6 @@
     </div>
   </div>
 
-  <script src="script.js?v=2"></script>
+  <script src="script.js?v=4"></script>
 </body>
 </html>
