@@ -18,11 +18,14 @@ window.addEventListener("load", () => {
   gateInput?.focus();
 });
 
+/* 入力欄に何か入っている時だけホームへ進む */
 function enterHome(){
   if (!gateInput || gateInput.value.trim() === "") {
     gateInput?.focus();
     return;
   }
+
+  if (!gate) return;
 
   gate.classList.add("is-hidden");
   gate.setAttribute("aria-hidden", "true");
@@ -36,23 +39,35 @@ gateInput?.addEventListener("keydown", (e) => {
   }
 });
 
-/* ①「すすむ」の遷移先（Pixiv） */
+/* pixivの遷移先 */
 const ONIGIRI_TARGET_URL = "https://www.pixiv.net/users/85762619";
 
-/* 開閉 */
+/* モーダルを開く */
 function openModal(){
+  if (!modal) return;
+
   modal.classList.add("on");
   modal.setAttribute("aria-hidden", "false");
 }
 
+/* モーダルを閉じる */
 function closeModal(){
+  if (!modal) return;
+
   modal.classList.remove("on");
   modal.setAttribute("aria-hidden", "true");
 }
 
-/* ふわっと遷移（白フェード） */
+/* ふわっと遷移 */
 function fadeAndGoExternal(url){
+  if (!fadeLayer) {
+    window.open(url, "_blank", "noopener,noreferrer");
+    closeModal();
+    return;
+  }
+
   fadeLayer.classList.add("on");
+
   setTimeout(() => {
     window.open(url, "_blank", "noopener,noreferrer");
     fadeLayer.classList.remove("on");
@@ -60,9 +75,15 @@ function fadeAndGoExternal(url){
   }, 350);
 }
 
-/* 暗転→ロード→トップへ戻る */
+/* 暗転ロードしてトップへ戻る */
 function darkLoadAndReturn(){
   closeModal();
+
+  if (!loading) {
+    window.location.hash = "#top";
+    return;
+  }
+
   loading.classList.add("on");
   loading.setAttribute("aria-hidden", "false");
 
@@ -76,8 +97,10 @@ function darkLoadAndReturn(){
 /* おにぎりクリックでモーダル */
 btnOnigiri?.addEventListener("click", openModal);
 
-/* すすむ → Pixivへ */
-btnOk?.addEventListener("click", () => fadeAndGoExternal(ONIGIRI_TARGET_URL));
+/* すすむ → pixivへ */
+btnOk?.addEventListener("click", () => {
+  fadeAndGoExternal(ONIGIRI_TARGET_URL);
+});
 
 /* やめる / × / － → 暗転ロードして戻る */
 btnCancel?.addEventListener("click", darkLoadAndReturn);
@@ -86,12 +109,14 @@ btnMin?.addEventListener("click", darkLoadAndReturn);
 
 /* Escで閉じる */
 document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape" && modal.classList.contains("on")) {
+  if (e.key === "Escape" && modal?.classList.contains("on")) {
     closeModal();
   }
 });
 
 /* 背景クリックで閉じる */
 modal?.addEventListener("click", (e) => {
-  if (e.target === modal) closeModal();
+  if (e.target === modal) {
+    closeModal();
+  }
 });
