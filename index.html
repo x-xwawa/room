@@ -2,14 +2,18 @@
 <html lang="ja">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- スマホ表示を安定させる -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+
   <title>⋱♱⋰ ⋱✮⋰ ⋱♱⋰ ⋱✮⋰ ⋱♱⋰</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="style.css" />
+  <!-- GitHub Pagesのキャッシュ対策。CSS更新時は v=2, v=3 と数字を変える -->
+  <link rel="stylesheet" href="style.css?v=2" />
 </head>
 
 <body>
@@ -68,6 +72,7 @@
         class="gate-input"
         type="text"
         autocomplete="off"
+        aria-label="すきなことば"
         autofocus
       />
 
@@ -75,6 +80,7 @@
     </div>
   </div>
 
+  <!-- pixiv確認モーダル -->
   <div class="modal-backdrop" id="modal" aria-hidden="true">
     <div class="modal-window" role="dialog" aria-modal="true" aria-labelledby="modal-title">
       <div class="modal-topbar">
@@ -93,6 +99,6 @@
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=2"></script>
 </body>
 </html>
