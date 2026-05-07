@@ -104,6 +104,14 @@ const HOME_MESSAGES = [
     height: "124px",
     align: "left"
   }
+    {
+    text: "げんきでるよ\n https://www.aozora.gr.jp/cards/000035/files/270_14914.html",
+    left: "48vw",
+    top: "61vh",
+    width: "54vw",
+    height: "124px",
+    align: "center"
+  },
 ];
 
 /* ランダム一言ウィンドウを表示 */
