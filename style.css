@@ -17,7 +17,7 @@
 
   --mail-bottom: 11vh;
 
-  /* ← お題箱をメールボックスへ近づけた */
+  /* お題箱とメール帯の距離 */
   --mail-gap-from-btn: 55px;
 }
 
@@ -133,7 +133,8 @@ body{
 .mail-top-link{
   position: absolute;
 
-  left: 3vw;
+  /* ← 元の位置へ戻した */
+  left: 7vw;
 
   bottom: calc(var(--mail-bottom) + var(--mail-gap-from-btn));
 
@@ -147,7 +148,9 @@ body{
 @media (min-width: 769px){
 
   .mail-top-link{
-    left: 5vw;
+
+    /* ← 元の位置へ戻した */
+    left: 9vw;
   }
 }
 
@@ -465,4 +468,3 @@ body{
     transform: translate(0,0) rotate(0deg);
   }
 }
-
