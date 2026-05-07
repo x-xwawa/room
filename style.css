@@ -9,14 +9,16 @@
   /* アイコンサイズ */
   --icon-size: clamp(44px, 10vw, 72px);
 
-  /* ← 文字を少し小さく */
+  /* 文字サイズ */
   --icon-text-size: clamp(12px, 3.2vw, 18px);
 
   --icon-gap: 14px;
   --icon-internal-gap: 12px;
 
   --mail-bottom: 11vh;
-  --mail-gap-from-btn: 80px;
+
+  /* ← お題箱をメールボックスへ近づけた */
+  --mail-gap-from-btn: 55px;
 }
 
 *{
@@ -59,11 +61,11 @@ body{
   position: absolute;
   top: 4.5vh;
 
-  /* ← 少し左へ */
   left: 4vw;
 
   color: var(--text);
   font-size: var(--thanks-size);
+
   letter-spacing: .02em;
   user-select: none;
 }
@@ -72,13 +74,13 @@ body{
 .icons{
   position: absolute;
 
-  /* ← 左へ寄せた */
   left: 3vw;
 
   top: 18vh;
 
   display: flex;
   flex-direction: column;
+
   gap: var(--icon-gap);
 }
 
@@ -94,6 +96,7 @@ body{
 .icon-btn{
   display: inline-flex;
   align-items: center;
+
   gap: var(--icon-internal-gap);
 
   text-decoration: none;
@@ -103,12 +106,14 @@ body{
   cursor: pointer;
 
   padding: 4px 6px;
+
   color: inherit;
 }
 
 .icon-btn img{
   width: var(--icon-size);
   height: auto;
+
   display: block;
 
   filter: drop-shadow(0 6px 10px var(--shadow));
@@ -117,10 +122,10 @@ body{
 .icon-text{
   color: var(--text);
 
-  /* ← 小さくなっている */
   font-size: var(--icon-text-size);
 
   letter-spacing: .04em;
+
   user-select: none;
 }
 
@@ -128,7 +133,6 @@ body{
 .mail-top-link{
   position: absolute;
 
-  /* ← アイコン位置に合わせる */
   left: 3vw;
 
   bottom: calc(var(--mail-bottom) + var(--mail-gap-from-btn));
@@ -170,6 +174,7 @@ body{
   display: flex;
   align-items: center;
   justify-content: center;
+
   gap: 10px;
 
   text-decoration: none;
@@ -179,6 +184,7 @@ body{
 
 .mail-icon{
   color: rgba(90,60,160,.65);
+
   font-size: 20px;
 }
 
@@ -239,6 +245,7 @@ body{
 }
 
 @keyframes spin{
+
   to{
     transform: rotate(360deg);
   }
@@ -321,6 +328,7 @@ body{
   padding: 22px 20px 18px;
 
   display: grid;
+
   gap: 14px;
 }
 
@@ -403,6 +411,7 @@ body{
 .mail-top-link,
 .mail-icon{
   display: inline-block;
+
   animation: katakata .28s steps(2, end) 5;
 }
 
@@ -456,3 +465,4 @@ body{
     transform: translate(0,0) rotate(0deg);
   }
 }
+
