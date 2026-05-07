@@ -103,15 +103,17 @@ const HOME_MESSAGES = [
     width: "54vw",
     height: "124px",
     align: "left"
-  }
-    {
-    text: "おくすり\n https://www.aozora.gr.jp/cards/000035/files/270_14914.html",
+  },
+  {
+    text: "",
+    linkText: "おくすり",
+    linkUrl: "https://www.aozora.gr.jp/cards/000035/files/270_14914.html",
     left: "48vw",
     top: "61vh",
     width: "54vw",
     height: "124px",
     align: "center"
-  },
+  }
 ];
 
 /* ランダム一言ウィンドウを表示 */
@@ -121,8 +123,31 @@ function showRandomHomeMessage(){
   const item = HOME_MESSAGES[Math.floor(Math.random() * HOME_MESSAGES.length)];
 
   homeMessage.classList.remove("is-show");
+  homeMessage.classList.remove("has-link");
 
-  homeMessage.textContent = item.text;
+  homeMessage.textContent = "";
+
+  if (item.text) {
+    const textNode = document.createElement("span");
+    textNode.textContent = item.text;
+    homeMessage.appendChild(textNode);
+  }
+
+  if (item.linkText && item.linkUrl) {
+    if (item.text) {
+      homeMessage.appendChild(document.createElement("br"));
+    }
+
+    const link = document.createElement("a");
+    link.href = item.linkUrl;
+    link.target = "_blank";
+    link.rel = "noreferrer";
+    link.textContent = item.linkText;
+
+    homeMessage.appendChild(link);
+    homeMessage.classList.add("has-link");
+  }
+
   homeMessage.style.setProperty("--home-msg-left", item.left);
   homeMessage.style.setProperty("--home-msg-top", item.top);
   homeMessage.style.setProperty("--home-msg-width", item.width);
@@ -147,6 +172,7 @@ function showRandomHomeMessage(){
   clearTimeout(homeMessageTimer);
   homeMessageTimer = setTimeout(() => {
     homeMessage.classList.remove("is-show");
+    homeMessage.classList.remove("has-link");
     homeMessage.setAttribute("aria-hidden", "true");
   }, 2000);
 }
