@@ -80,6 +80,32 @@ const HOME_MESSAGES = [
     width: "46vw",
     height: "104px",
     align: "center"
+  },
+
+  /* 追加ぶん */
+  {
+    text: "お誕生日\nおめでとう ͈ᴖ ̫ᴖ ͈",
+    left: "1.5vw",
+    top: "37vh",
+    width: "46vw",
+    height: "110px",
+    align: "left"
+  },
+  {
+    text: "もっとたんぱく質を\n摂ろう",
+    left: "50vw",
+    top: "49vh",
+    width: "46vw",
+    height: "110px",
+    align: "left"
+  },
+  {
+    text: "おやすみ\nいっぱい寝るんだぞ",
+    left: "42vw",
+    top: "22vh",
+    width: "46vw",
+    height: "110px",
+    align: "left"
   }
 ];
 
