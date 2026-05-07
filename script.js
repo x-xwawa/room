@@ -25,7 +25,7 @@ let homeMessageTimer = null;
 */
 const HOME_MESSAGES = [
   {
-    text: "いつもありがとう！",
+    text: "いつも\nありがとう！",
     left: "50vw",
     top: "43vh",
     width: "54vw",
@@ -89,7 +89,7 @@ const HOME_MESSAGES = [
     align: "left"
   },
   {
-    text: "もっとたんぱく質を\n摂ろう",
+    text: "もっとたんぱく質\nを摂ろう",
     left: "50vw",
     top: "49vh",
     width: "54vw",
