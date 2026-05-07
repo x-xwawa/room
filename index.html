@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>⋱♱⋰ ⋱✮⋰ ⋱♱⋰ ⋱✮⋰ ⋱♱⋰</title>
 
-  <!-- DotGothic16 -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
@@ -14,27 +13,21 @@
 </head>
 
 <body>
-  <!-- 画面フェード用 -->
   <div id="fade-layer" aria-hidden="true"></div>
 
-  <!-- ローディング（暗転＋くるくる） -->
   <div id="loading" aria-hidden="true">
     <div class="spinner" aria-hidden="true"></div>
   </div>
 
   <main class="stage" id="top">
-    <!-- 上部の文字 -->
-    <div class="thanks">Thank you for watching．．．</div>
+    <div class="thanks">Thank you for watching</div>
 
-    <!-- アイコン群 -->
     <div class="icons">
-      <!-- ① おにぎり：確認モーダル →「すすむ」だけ外部へ -->
       <button class="icon-btn" id="btn-onigiri" type="button">
         <img src="images/icon_1.png" alt="pixivへ" />
         <span class="icon-text">pixiv</span>
       </button>
 
-      <!-- ②〜④ ふつうに外部リンク -->
       <a class="icon-btn" href="https://skeb.jp/@x_xwawa" target="_blank" rel="noreferrer">
         <img src="images/icon_2.png" alt="Skebへ" />
         <span class="icon-text">ご依頼</span>
@@ -51,7 +44,6 @@
       </a>
     </div>
 
-    <!-- ✅ メールの上：お題箱リンク（下線つき・左位置や文字サイズは icon-text と同じ） -->
     <a class="mail-top-link icon-text"
        href="https://odaibako.net/u/x_xwawa"
        target="_blank"
@@ -59,7 +51,6 @@
       お題箱
     </a>
 
-    <!-- メール：クリックでメーラーの作成画面 -->
     <a class="mail-btn"
        href="mailto:zzwxx411@gmail.com?subject=%E3%81%8A%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B&body=%E3%81%94%E7%94%A8%E4%BB%B6%EF%BC%9A%0A"
        aria-label="メールを作成">
@@ -67,7 +58,23 @@
     </a>
   </main>
 
-  <!-- おにぎり用：確認モーダル（別アプリ風） -->
+  <!-- 最初の入力ウィンドウ -->
+  <div id="gate" class="gate" aria-hidden="false">
+    <div class="gate-window">
+      <p class="gate-text">・すきなことばをいれてね・</p>
+
+      <input
+        id="gate-input"
+        class="gate-input"
+        type="text"
+        autocomplete="off"
+        autofocus
+      />
+
+      <button id="gate-ok" class="gate-ok" type="button">すすむ</button>
+    </div>
+  </div>
+
   <div class="modal-backdrop" id="modal" aria-hidden="true">
     <div class="modal-window" role="dialog" aria-modal="true" aria-labelledby="modal-title">
       <div class="modal-topbar">
@@ -89,4 +96,3 @@
   <script src="script.js"></script>
 </body>
 </html>
-
