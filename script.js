@@ -15,6 +15,105 @@ const gateWindow = document.getElementById("gate-window");
 const gateInput = document.getElementById("gate-input");
 const gateOk = document.getElementById("gate-ok");
 
+/* ホーム表示後に出るランダム一言ウィンドウ */
+const homeMessage = document.getElementById("home-message");
+let homeMessageTimer = null;
+
+/*
+  7種類の一言ウィンドウ。
+  left と top を変えると表示位置が変わります。
+  width と height を変えると箱の大きさが変わります。
+*/
+const HOME_MESSAGES = [
+  {
+    text: "いつもありがとう！",
+    left: "50vw",
+    top: "43vh",
+    width: "46vw",
+    height: "96px",
+    align: "center"
+  },
+  {
+    text: "権威に盲従して\n生きたい！",
+    left: "4.5vw",
+    top: "52vh",
+    width: "46vw",
+    height: "108px",
+    align: "left"
+  },
+  {
+    text: "バスクチーズケーキじゃなくて\nサンセバスチャンチーズケーキ\nってよべ！",
+    left: "3vw",
+    top: "24vh",
+    width: "46vw",
+    height: "128px",
+    align: "left"
+  },
+  {
+    text: "エーーン\n(ノ_<)。・・°",
+    left: "48vw",
+    top: "61vh",
+    width: "46vw",
+    height: "106px",
+    align: "center"
+  },
+  {
+    text: "こんな時間まで\nなにしてるの？",
+    left: "3vw",
+    top: "57vh",
+    width: "46vw",
+    height: "106px",
+    align: "left"
+  },
+  {
+    text: "おはよう！\n早起きしてえらいね",
+    left: "4vw",
+    top: "25vh",
+    width: "46vw",
+    height: "108px",
+    align: "left"
+  },
+  {
+    text: "わたしも\nだいすきだよ",
+    left: "18vw",
+    top: "48vh",
+    width: "46vw",
+    height: "104px",
+    align: "center"
+  }
+];
+
+/* ランダム一言ウィンドウを表示 */
+function showRandomHomeMessage(){
+  if (!homeMessage) return;
+
+  const item = HOME_MESSAGES[Math.floor(Math.random() * HOME_MESSAGES.length)];
+
+  homeMessage.classList.remove("is-show");
+
+  homeMessage.textContent = item.text;
+  homeMessage.style.setProperty("--home-msg-left", item.left);
+  homeMessage.style.setProperty("--home-msg-top", item.top);
+  homeMessage.style.setProperty("--home-msg-width", item.width);
+  homeMessage.style.setProperty("--home-msg-height", item.height);
+  homeMessage.style.setProperty("--home-msg-align", item.align);
+
+  homeMessage.setAttribute("aria-hidden", "false");
+
+  /*
+    同じ要素で何度もアニメーションを再生できるようにする処理。
+  */
+  void homeMessage.offsetWidth;
+
+  homeMessage.classList.add("is-show");
+
+  clearTimeout(homeMessageTimer);
+  homeMessageTimer = setTimeout(() => {
+    homeMessage.classList.remove("is-show");
+    homeMessage.setAttribute("aria-hidden", "true");
+  }, 2000);
+}
+
 /* 入力欄にフォーカス */
 function focusGateInput(){
   if (!gate || gate.classList.contains("is-hidden")) return;
@@ -68,6 +167,8 @@ function enterHome(){
 
   gate.classList.add("is-hidden");
   gate.setAttribute("aria-hidden", "true");
+
+  showRandomHomeMessage();
 }
 
 gateOk?.addEventListener("click", enterHome);
