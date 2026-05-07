@@ -20,6 +20,13 @@
   --gate-input-border: #cfcfcf;
   --gate-input-border-focus: #bdbdbd;
   --gate-input-text: #8f8f8f;
+
+  /*
+    Thank you for watching と お題箱だけの文字色。
+    数字の 0.55 を小さくするとさらに薄く、
+    大きくすると濃くなります。
+  */
+  --sub-text: rgba(203, 188, 242, 0.55);
 }
 
 *{
@@ -57,7 +64,7 @@ body{
   position: absolute;
   top: 4.5vh;
   left: 6vw;
-  color: var(--text);
+  color: var(--sub-text);
   font-size: var(--thanks-size);
   letter-spacing: .02em;
   user-select: none;
@@ -126,6 +133,7 @@ body{
   position: absolute;
   left: 7vw;
   bottom: calc(var(--mail-bottom) + var(--mail-gap-from-btn));
+  color: var(--sub-text);
   text-decoration: underline;
   text-underline-offset: 6px;
   text-decoration-thickness: 2px;
