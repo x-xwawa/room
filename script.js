@@ -97,7 +97,7 @@ const HOME_MESSAGES = [
     align: "left"
   },
   {
-    text: "おやすみ\nいっぱい寝るんだぞ",
+    text: "おやすみ\nいっぱい寝るん\nだぞ",
     left: "4vw",
     top: "25vh",
     width: "54vw",
