@@ -98,8 +98,8 @@ const HOME_MESSAGES = [
   },
   {
     text: "おやすみ\nいっぱい寝るんだぞ",
-    left: "42vw",
-    top: "22vh",
+    left: "4vw",
+    top: "25vh",
     width: "54vw",
     height: "124px",
     align: "left"
