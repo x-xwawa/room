@@ -9,6 +9,33 @@ const btnMin = document.getElementById("btn-min");
 const loading = document.getElementById("loading");
 const fadeLayer = document.getElementById("fade-layer");
 
+/* 最初の入力ウィンドウ */
+const gate = document.getElementById("gate");
+const gateInput = document.getElementById("gate-input");
+const gateOk = document.getElementById("gate-ok");
+
+window.addEventListener("load", () => {
+  gateInput?.focus();
+});
+
+function enterHome(){
+  if (!gateInput || gateInput.value.trim() === "") {
+    gateInput?.focus();
+    return;
+  }
+
+  gate.classList.add("is-hidden");
+  gate.setAttribute("aria-hidden", "true");
+}
+
+gateOk?.addEventListener("click", enterHome);
+
+gateInput?.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    enterHome();
+  }
+});
+
 /* ①「すすむ」の遷移先（Pixiv） */
 const ONIGIRI_TARGET_URL = "https://www.pixiv.net/users/85762619";
 
@@ -17,6 +44,7 @@ function openModal(){
   modal.classList.add("on");
   modal.setAttribute("aria-hidden", "false");
 }
+
 function closeModal(){
   modal.classList.remove("on");
   modal.setAttribute("aria-hidden", "true");
@@ -26,7 +54,6 @@ function closeModal(){
 function fadeAndGoExternal(url){
   fadeLayer.classList.add("on");
   setTimeout(() => {
-    // 外部は新しいタブで開く（安全設定つき）
     window.open(url, "_blank", "noopener,noreferrer");
     fadeLayer.classList.remove("on");
     closeModal();
@@ -42,7 +69,6 @@ function darkLoadAndReturn(){
   setTimeout(() => {
     loading.classList.remove("on");
     loading.setAttribute("aria-hidden", "true");
-    // ページ先頭へ（スクロール禁止でも確実）
     window.location.hash = "#top";
   }, 900);
 }
@@ -58,14 +84,14 @@ btnCancel?.addEventListener("click", darkLoadAndReturn);
 btnClose?.addEventListener("click", darkLoadAndReturn);
 btnMin?.addEventListener("click", darkLoadAndReturn);
 
-/* Escで閉じる（閉じるだけ。戻る演出にしたいならdarkLoadAndReturnに変更OK） */
+/* Escで閉じる */
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape" && modal.classList.contains("on")) {
     closeModal();
   }
 });
 
-/* 背景クリックで閉じる（不要なら消してOK） */
+/* 背景クリックで閉じる */
 modal?.addEventListener("click", (e) => {
   if (e.target === modal) closeModal();
 });
