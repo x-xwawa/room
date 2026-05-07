@@ -81,7 +81,7 @@ const HOME_MESSAGES = [
     align: "center"
   },
   {
-    text: "お誕生日\nおめでとう！ ˆᴗˆ",
+    text: "お誕生日\nおめでとう！\n ˆᴗˆ",
     left: "1.5vw",
     top: "37vh",
     width: "54vw",
