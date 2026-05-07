@@ -28,6 +28,13 @@
   --gate-input-text: #8f8f8f;
 
   /*
+    ランダム一言ウィンドウ全体の縮小率。
+    数字を小さくすると、文字・枠・影ごと小さくなります。
+    例：0.80 = もう少し小さい / 0.90 = 少し大きい
+  */
+  --home-msg-global-scale: 0.82;
+
+  /*
     Thank you for watching と お題箱だけの文字色。
     数字の 0.55 を小さくするとさらに薄く、
     大きくすると濃くなります。
@@ -236,8 +243,8 @@ body{
   align-items: center;
   justify-content: center;
 
-  width: var(--home-msg-width, 46vw);
-  min-height: var(--home-msg-height, 96px);
+  width: var(--home-msg-width, 54vw);
+  min-height: var(--home-msg-height, 118px);
 
   left: var(--home-msg-left, 50vw);
   top: var(--home-msg-top, 50vh);
@@ -254,7 +261,15 @@ body{
   letter-spacing: .06em;
   font-family: inherit;
   text-align: var(--home-msg-align, center);
-  white-space: pre-line;
+
+  /*
+    改行は \n の位置だけを基本にします。
+    ボックス幅不足による変な自動改行を減らします。
+  */
+  white-space: pre;
+
+  transform: scale(var(--home-msg-scale, var(--home-msg-global-scale)));
+  transform-origin: top left;
 
   pointer-events: none;
   user-select: none;
