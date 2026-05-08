@@ -82,28 +82,6 @@ body{
   letter-spacing: .02em;
   user-select: none;
   display: inline-block;
-  animation: thanksKatakata .22s steps(2, end) 23;
-}
-
-@keyframes thanksKatakata{
-  0%{
-    transform: translate(0,0) rotate(0deg);
-  }
-  20%{
-    transform: translate(1px,-1px) rotate(1deg);
-  }
-  40%{
-    transform: translate(-1px,1px) rotate(-1deg);
-  }
-  60%{
-    transform: translate(1px,1px) rotate(.5deg);
-  }
-  80%{
-    transform: translate(-1px,-1px) rotate(-.5deg);
-  }
-  100%{
-    transform: translate(0,0) rotate(0deg);
-  }
 }
 
 .icons{
